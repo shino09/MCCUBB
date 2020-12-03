@@ -1,0 +1,5 @@
+<h2 class="page-header">Nuevo usuario</h2>
+<?php echo Form::open(["id"=>"frm","class"=>"form-horizontal"]); ?>
+
+<?php echo $__env->make("usuario._form", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo Form::close(); ?> 

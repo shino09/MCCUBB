@@ -1,0 +1,168 @@
+<h1 class="page-header">Usuarios del sistema
+   
+</h1>
+ <div class="pull-right">
+        <a href="javascript:ajaxLoad('usuario/create')" type="button" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Agregar nuevo usuario</a>
+    </div>
+<div class="col-sm-7 form-group">
+    <div class="input-group">
+        <input class="form-control" id="search" value="<?php echo e(Session::get('usuario_search')); ?>"
+               onkeydown="if (event.keyCode == 13) ajaxLoad('<?php echo e(url('usuario/list')); ?>?ok=1&search='+this.value)"
+                             placeholder="Buscar Usuario por Apellido Paterno o RUT del Usuario"
+
+               type="text">
+
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default"
+                    onclick="ajaxLoad('<?php echo e(url('usuario/list')); ?>?ok=1&search='+$('#search').val())"><i
+                        class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+    
+
+       
+
+
+
+
+
+<tr>
+        <th width="50px" style="text-align: center">No</th>
+     
+   <th>
+            <a href="javascript:ajaxLoad('usuario/list?field=rut&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                Rut 
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='rut'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+
+          <th>
+            <a href="javascript:ajaxLoad('usuario/list?field=APELLIDOPATERNO&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                Nombre Usuario
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='APELLIDOPATERNO'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+
+       
+   
+
+
+    <th>
+            <a href="javascript:ajaxLoad('usuario/list?field=name&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                Email
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='name'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+        <!--<th>
+            <a href="javascript:ajaxLoad('usuario/list?field=email&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                email
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='email'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>-->
+
+      <!--<th>
+            <a href="javascript:ajaxLoad('usuario/list?field=password&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                password
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='password'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>-->
+
+
+          <th>
+            <a href="javascript:ajaxLoad('usuario/list?field=tipoUsuario&sort=<?php echo e(Session::get("usuario_sort")=="asc"?"desc":"asc"); ?>')">
+                Tipo de Usuario
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('usuario_field')=='tipoUsuario'?(Session::get('usuario_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+      
+        <th width="150px"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php $i = 1;?>
+    <?php foreach($usuarios as $key=>$usuario): ?>
+        <tr>
+            <td align="center"><?php echo e($i++); ?></td>
+
+                        <td align="left"> <?php echo e($usuario->rut); ?></td>
+
+
+
+
+
+                                                                <td align="left">    <?php echo $usuario->APELLIDOPATERNO;?>           <?php echo $usuario->APELLIDOMATERNO;?>        <?php echo $usuario->name;?>  
+</td>
+
+
+                                                <td align="left"> <?php echo e($usuario->email); ?></td>
+
+                                              <!--  <td align="right"> <?php echo e($usuario->password); ?></td>-->
+                          <!--  <td align="right"> <?php echo e($usuario->tipoUsuario); ?></td>-->
+
+
+<td align="left"> 
+                                                <?php if ((0)==($usuario->tipoUsuario))       
+                                                     {echo "Secretaria";  }
+
+if ((1)==($usuario->tipoUsuario))              
+    {echo "Director";  }
+  
+
+
+  ?>
+      
+  </td>
+
+
+            <td style="text-align: center" width="200">
+
+               <a role="button"  class="btn btn-warning  btn-circle" title="Mostrar"
+                   href="javascript:ajaxLoad('usuario/show2/<?php echo e($usuario->id); ?>')"><i class="fa fa-eye"></i> 
+                     </a> <?php if(Auth::user()->id != $usuario->id): ?>
+              
+                       <a class="btn btn-primary btn-circle" title="Editar"
+                   href="javascript:if(confirm('Cambiar los datos del usuario menos contraseña')) ajaxLoad('usuario/update2/<?php echo e($usuario->id); ?>')">
+                    <i class="fa fa-list"></i> </a>
+                      <a class="btn btn-primary btn-circle" title="Editar"
+                   href="javascript:if(confirm('Cambiar los datos del usuario incluyendo la contraseña. Debera ingresar una nueva contraseña para el usuario')) ajaxLoad('usuario/update/<?php echo e($usuario->id); ?>')">
+                    <i class="fa fa-list"></i> </a>
+
+                <a class="btn btn-danger btn-circle" title="Eliminar"
+                   href="javascript:if(confirm('¿Esta seguro que quiere eliminar este registro?')) ajaxLoad('usuario/delete/<?php echo e($usuario->id); ?>')">
+                    <i class="fa fa-times"></i> 
+                </a>
+                                                        <?php endif; ?>
+
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+<div class="pull-right"><?php echo str_replace('/?','?',$usuarios->render()); ?></div>
+<div class="row">
+    <i class="col-sm-12">
+        Total: <?php echo e($usuarios->total()); ?> registros
+    </i>
+</div>
+<script>
+    $('.pagination a').on('click', function (event) {
+        event.preventDefault();
+        ajaxLoad($(this).attr('href'));
+    });
+</script> 

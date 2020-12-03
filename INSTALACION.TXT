@@ -1,0 +1,10 @@
+Instalacion Sistema en servidor
+
+-Subir directorio completo mediante un cliente ftp o ssh
+-Copiar el contenido del script MAGISTERUBB.SQL en el adminitrador de base de  datos MySql (phpmyadmin) 
+-Ver el archivo de configuracion php.ini del servidor y  si el tiempo maximo de ejecucion es menor a 120 (seg), cambiarlo para que se puedan generar bien todos los informes PDF
+-escribir la direcion ip del servidor y el nombre de la carpeta  que se subio al server, para acceder al sistema en el servidor
+-loguarse con:
+rut: 17.801.781-0
+pass: 123456
+-crear un usuario director, con un rut y email real

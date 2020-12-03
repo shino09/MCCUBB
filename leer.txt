@@ -1,0 +1,4 @@
+cargar script base de datos en phpmyadmin
+
+
+cambiar time execution en php.ini  a 300 seg o mas para que pueda redendirizar los reportes grandes

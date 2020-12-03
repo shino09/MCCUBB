@@ -1,0 +1,344 @@
+<h1 class="page-header">Tribunal Evaluador de  Tesis 
+    
+</h1>
+
+<div class="pull-right">
+        <a href="javascript:if(confirm('Recuerde que solo podrá crear un tribunal de  tesis que tengan un Profesor guia ya asignado')) ajaxLoad('conforman17/list2create')" type="button" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Conformar nuevo Tribunal para una Tesis</a>
+    </div>
+
+<div class="col-sm-7 form-group">
+    <div class="input-group">
+        <input class="form-control" id="search" value="<?php echo e(Session::get('conforman17_search')); ?>"
+               onkeydown="if (event.keyCode == 13) ajaxLoad('<?php echo e(url('conforman17/list')); ?>?ok=1&search='+this.value)"
+               placeholder="Buscar Tesis por Apellido Paterno o RUT del Alumno Tesista"
+               type="text">
+
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default"
+                    onclick="ajaxLoad('<?php echo e(url('conforman17/list')); ?>?ok=1&search='+$('#search').val())"><i
+                        class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th width="50px" style="text-align: center">No</th>
+     
+       <!-- <th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=id&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                RUT
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='id'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>-->
+
+       
+     <th><a style:background-color:blue>
+            RUT Alumno<a>
+        </th>
+
+
+ <!--<th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=PRO_PATERNO&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                Nombre Profesor
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='PRO_PATERNO'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>-->
+
+
+
+        <th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=ALU_PATERNO&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                Nombre Alumno
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='ALU_PATERNO'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+
+<th><a style:background-color:blue>
+            Nombre Tesis<a>
+        </th>
+
+
+        <th><a style:background-color:blue>
+            Semestre<a>
+        </th>
+
+
+        <!-- <th><a style:background-color:blue>
+            Cargo Profesor<a>
+        </th>
+
+     <th><a style:background-color:blue>
+             Profesor<a>
+        </th>
+
+           
+
+
+             <th><a style:background-color:blue>
+            Fecha Creación<a>
+        </th>-->
+         
+
+       
+        <!--
+ <th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=PRO_PATERNO&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                Cargo Profesor
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='PRO_PATERNO'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+
+
+         <th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=PRO_MATERNO&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                Id Tribunal
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='PRO_MATERNO'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>
+
+
+    <th>
+            <a href="javascript:ajaxLoad('conforman17/list?field=PRO_NOMBRES&sort=<?php echo e(Session::get("conforman17_sort")=="asc"?"desc":"asc"); ?>')">
+                Fecha Creacion
+            </a>
+            <i style="font-size: 12px"
+               class="fa  <?php echo e(Session::get('conforman17_field')=='PRO_NOMBRES'?(Session::get('conforman17_sort')=='asc'?'fa-sort-alpha-asc ':'fa-sort-alpha-desc '):''); ?>">
+            </i>
+        </th>-->
+
+     
+        <th width="140px"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php $i = 1;?>
+                                <?php foreach($conformans as $key=>$conforman): ?>
+                    <?php foreach($TESIS as $TES): ?>
+                           <?php if (($TES->ALUMNO_id)==($conforman->id) ) { ?> 
+                        <?php foreach($EVALUA as $EVA): ?>
+                               <?php if (($TES->id)==($EVA->id)) { ?> 
+
+
+                 <?php foreach($TRIBUNAL as $TRI): ?>
+                        <?php if (( ($EVA->TRIBUNAL_id)==($TRI->id) )) { ?> 
+
+                <?php foreach($conformans2 as $key=>$conforman17): ?>
+                       <?php if ( ($conforman17->TRIBUNAL_id)==($TRI->id) ) { ?> 
+                                <?php foreach($profesor as $key=>$pro): ?>
+
+
+                        <?php if ( ($pro->id)==($conforman17->id)) { ?>  
+
+
+        <tr>
+            <td align="center"><?php echo e($i++); ?></td>
+
+                        <td align="left"> <?php echo e($conforman->id); ?></td>
+
+
+            
+
+
+
+          <td align="left">
+
+
+
+        <?php echo $conforman->ALU_PATERNO; ?>
+            <?php echo $conforman->ALU_MATERNO; ?>
+                <?php echo $conforman->ALU_NOMBRES; ?>
+
+
+
+
+
+</td>
+
+
+ <td align="left">
+             
+
+    <?php echo $TES->TES_NOMBRE; ?>
+
+
+ 
+
+        
+
+</td>
+
+
+ <td align="left">
+             
+
+    <?php echo $TES->TES_ANO; ?>-<?php echo $TES->TES_SEMESTRE; ?>
+
+
+
+ 
+
+        
+
+</td>
+
+<!--
+ <td align="left">
+
+        <?php if (($conforman17->CON_tipoprofesor=='1')) { ?>               
+
+                <?php echo "Profesor Guia";  ?>
+
+
+  <?php } ?>
+
+
+
+  <?php if (($conforman17->CON_tipoprofesor=='2')) { ?>               
+
+
+
+
+        
+                <?php echo "Profesor Informante";  ?>
+
+
+
+  <?php } ?>
+
+
+
+  <?php if (($conforman17->CON_tipoprofesor=='3')) { ?>               
+
+
+
+
+        
+                <?php echo "Profesor Sala";  ?>
+                    <?php } ?>
+
+
+</td>
+
+ <td align="left">
+ 
+
+    <?php echo $pro->PRO_PATERNO; ?>
+        <?php echo $pro->PRO_MATERNO; ?>
+
+    <?php echo $pro->PRO_NOMBRES; ?>
+
+
+ 
+</td>
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+
+
+      <td align="left">
+
+
+    <?php echo $TRI->TRI_FECHACREACION; ?>
+
+   
+
+
+
+</td>-->
+
+
+
+
+
+
+
+
+           <td style="text-align: center">
+
+
+                     <!--<a role="button"  class="btn btn-warning  btn-circle" title="Mostrar"
+                   href="javascript:ajaxLoad('conforman17/show2/<?php echo e($conforman->id); ?>/<?php echo e($TES->id); ?>')"><i class="fa fa-eye"></i> 
+                     </a>-->
+                     <a role="button"  class="btn btn-warning  btn-circle" title="Mostrar"
+                   href="javascript:ajaxLoad('conforman17/show3/<?php echo e($conforman->id); ?>/<?php echo e($TES->id); ?>/<?php echo e($TRI->id); ?>')"><i class="fa fa-eye"></i> 
+                     </a>
+                <!--<a class="btn btn-primary btn-circle" title="Edit"
+                   href="javascript:ajaxLoad('conforman17/update3/<?php echo e($conforman17->id); ?>/<?php echo e($conforman17->TRIBUNAL_id); ?>/<?php echo e($conforman17->id); ?>/<?php echo e($conforman17->TRIBUNAL_id); ?>')">
+                    <i class="fa fa-list"></i> </a>-->
+                <a class="btn btn-danger btn-circle" title="Eliminar"
+                   href="javascript:if(confirm('Esta seguro que quiere eliminar el tribunal de evaluacion para esta tesis?')) ajaxLoad('conforman17/delete/<?php echo e($conforman17->id); ?>/<?php echo e($conforman17->TRIBUNAL_id); ?>/<?php echo e($TES->id); ?>')">
+                    <i class="fa fa-times"></i> 
+                </a>
+                    <?php  break;?>
+
+            </td>
+        </tr>
+          <?php } ?>
+
+    <?php endforeach; ?>
+                        <?php  break;?>
+
+     <?php } ?>
+
+    <?php endforeach; ?>
+                        <?php  break;?>
+
+     <?php } ?>
+
+    <?php endforeach; ?>
+                        <?php  break;?>
+
+     <?php } ?>
+
+    <?php endforeach; ?>
+     <?php } ?>
+
+    <?php endforeach; ?>
+
+    <?php endforeach; ?>
+
+  
+    </tbody>
+</table>
+<div class="pull-right"><?php echo str_replace('/?','?',$conformans->render()); ?></div>
+<div class="row">
+    <i class="col-sm-12">
+        Total: <?php echo e($i-1); ?> registros
+    </i>
+</div>
+<script>
+    $('.pagination a').on('click', function (event) {
+        event.preventDefault();
+        ajaxLoad($(this).attr('href'));
+    });
+</script> 
